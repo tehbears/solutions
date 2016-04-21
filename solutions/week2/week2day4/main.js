@@ -25,14 +25,15 @@ function squareNumericValues(obj){
 }
 
 //==============================================exercise
-
+var counter = 0;
 
 function makeBook(title, name, genre, numberOfPages){
 	return {
 		title: title,
 		author: name,
 		genre: genre,
-		numberOfPages: numberOfPages
+		numberOfPages: numberOfPages,
+		id: counter++
 	};
 }
 
@@ -88,7 +89,6 @@ function movieMaker (title, director, duration, releaseDate, obj){
 
 var inception = movieMaker('Inception', 'Chistopher Nolan', '2 hours', 'May 2012', [{ name: 'Leonardo DiCaprio', role: 'Main actor', awards: 'AwesomeStuff'}, {name: 'Joseph Gordon-Levitt',role: 'Supporting Actor', award: 'Something Cool'}]);
 
-
 var imitationGame = movieMaker('The Imitation Game', 'Morten Tyldum', '2 hours', 'May 2014', [{name: 'Benedict Cumberbatch', role: 'Main Actor', awards: 'Some really amazing cool stuff'}, {name: 'Keira Knightley', role: 'Main Actress', award: 'Something freaking amazing' }]);
 
 var bigHero6 = movieMaker('Big Hero 6', 'Don Hall', '2 hours', 'May 2014', [{name: 'Scott Adsit', role: 'Baymax', award: 'Best stuff ever'}, {name: 'Ryan Potter', role: 'Hiro', award: 'Coolest stuff ever'}]);
@@ -119,20 +119,66 @@ function displayAllMoviesAndCasts(arrayOfMovies) {
 	//add ids to books 
 		//use counter increments everytime make book is called
 
-function addTag(){
+function addTag(obj,addNewTag){
+	if(!obj['tag']){
+		obj['tag'] = [];
+	}
 
+	if(obj['genre']){
+		delete obj['genre'];
+	}
+
+	for(var i = 0; i < obj.tag.length; i++){
+		if(obj.tag[i] === addNewTag){
+			return 'Tag already exist!';
+		} 
+	}
+
+	obj['tag'].push(addNewTag);
+	
+	return 'New Tag Added!';
 }
 
-function removeTag(){
+function removeTag(obj, removeTag){
+	if(!obj['tag']){
+		obj['tag'] = [];
+		return 'This book did not have a tag key. New tag key added!'
+	}
 
+	for(var i = 0; i < obj.tag.length; i++){
+		if(obj.tag[i] === removeTag){
+			obj.tag.splice(i, 1);
+			return 'Tag Removed!';
+		} 
+	}	
+	return 'That tag did not exist!';
 }
 
-function searchBookWithTags(){
+function searchBookByTags(bookArray, searchByTag){
+	var searchByTagResult = [];
+	for(var i = 0; i < bookArray.length - 1; i++){
+		for(var j = 0; j < bookArray[i].tag.length; j++){	
+			console.log('j ', bookArray);
+			if(bookArray[i].tag[j] === searchByTag){
+				searchByTagResult.push(bookArray[i].title);
+			} 
+		}
+	}	
+	if(searchByTagResult.length === 0){
+		return 'No books found with that tag!';
+	}
 
+	return searchByTagResult;
 }
 
-function removeBookByID(){
-
+function removeBookByID(arrayOfBooks, id){
+	for(var i = 0; i < arrayOfBooks.length; i++){
+		if(arrayOfBooks[i].id === id){
+			arrayOfBooks.splice(i, 1); 
+			return 'Book removed!';
+		}
+	}
+	return 'This book was already deleted or did not exist in the book list.';
 }
 
 
