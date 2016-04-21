@@ -71,7 +71,7 @@ function guessMyNumber (num){
 	var randomNum = Math.floor(Math.random() * 5)
 	if(num > 5){
 		return "Your guess is out of bounds! Please guess between 0-5";
-	},
+	}
 	if(num ===  randomNum){
 		return "You guessed my number!";
 	}
@@ -142,14 +142,6 @@ function letterGrade (letter, score) {
 	}
 }
 
-//===It turns out that we can write logical and and logical or in terms of each other and logical not using De Morgan's Laws.
-	//==Write a function or that works like ||, but only uses ! and &&.
-		//"not (A and B)" is the same as "(not A) or (not B)"
-
-	function worksLikeOr (){
-
-	}	
-
 // Write a function or that works like ||, but only uses ! and &&.
 // Write a function and that works like &&, but only uses ! and ||.
 
@@ -160,17 +152,17 @@ function letterGrade (letter, score) {
 // "not (A or B)" is the same as "(not A) and (not B)".
 
 function worksLikeAnd(a, b){
-	if(!(a || b)){
-		return true;
+	if(!a || !b){
+		return false;
 	}
-	return false;
+	return true;
 }
 
 function worksLikeOr(a, b){
 	if(!a && !b){
-		return true;
+		return false;
 	}
-	return false;
+	return true;
 }
 
 // console.log(worksLikeOr(false, false))
