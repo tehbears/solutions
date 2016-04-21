@@ -1,14 +1,40 @@
-//================================warm ups
+//========================Warm Ups Self Challenge
 
-function power_iter(base, exponent) {
-  var result = 1;
-  var count = 0;
-  while (count < exponent) {
-    result = result * base;
-    count = count + 1;
-  }
-  return result;
+function billTotal (total){
+	var tip = .15;
+	var tax = .095; 
+
+	tip = total * tip;
+	tax = total * tax;
+	total = Math.round((tip + tax + total) * 100) / 100;
+	return "Your total comes to " + total;
 }
+
+function animals (animal, emotion){
+	if (animal ==='cat' && emotion === 'happy'){
+		return 'The cat dances with joy!';
+	} else if (animal ==='cat' && emotion === 'sad'){
+		return 'The cat mopes around';
+	} else if (animal ==='cat' && emotion === 'angry') {
+		return 'The cat shreds your favorite pair of shoes!';
+	}
+
+	if(animal ==='dog' && emotion === 'happy'){
+		return 'The dog licks your face!';
+	} else if (animal ==='dog' && emotion === 'sad'){
+		return 'The dog gives you sad puppy eyes';
+	} else if(animal ==='dog' && emotion === 'angry'){
+		return 'The dog barks really loud!';
+	}
+}
+
+function digitalSum(num){
+	if(num === 0){
+		return num;
+	}
+	return (num % 10) + digitalSum(Math.floor(num / 10))
+}
+
 
 
 function sum(numArray){
@@ -152,7 +178,7 @@ function oddLengthWords(str){
 	}
 	return result;
 }
-//========You can pass functions in as parameters. Pretty neat stuff :D
+//========You can pass functions in as arguments. Pretty neat stuff :D
 console.log(keep([1,2,3,4,5,6,7,8,9,10], evens)); 
 console.log(keep('to two three four five bbbb', evenLengthWords));
 console.log(keep([1,2,3,4,5,6,7,8,9,10], odds));

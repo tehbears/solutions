@@ -125,3 +125,9 @@ function power (b, e){
 	}
 	return b * power(b, e -1);
 }
+
+function squareRoot(num){
+	
+
+
+};

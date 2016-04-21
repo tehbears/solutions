@@ -110,13 +110,17 @@ function repeatedAddition(x, y){
 
 //==========================================================use .slice to get the length of a string
 
-function stringLength (str, count){
-	var newStr = str.slice(0, count);
-	if(str === newStr){
-		return count;
-	}
-	return stringLength(str, count + 1);
+function stringLength(n){
+    if(n.slice(1) === ""){
+        return 1;
+    } return 1 + stringLength(n.slice(1))
 }
+
+// "hello".slice(1) = "ello", and "a".slice(1) = "".  So the first part says if there's a single letter left, return 1
+// the second part then returns 1 and then adds to it the same function, shortened by 1 character
+// so "hi" would be "hi".slice(1)="i" !== "", so return (1+stringLength("i".slice(1))
+// a single letter string returns 1, so that would then return 1 to make the return (1+1)
+// and so on...
 
 //=============================================================create your own modulo
 

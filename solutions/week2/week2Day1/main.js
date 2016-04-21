@@ -1,39 +1,26 @@
-//========================Warm Ups Self Challenge
+//=====> Arrays are used to store a collection of data; often of the same type. 
+	//This construct is useful because we can access data in an array through indexes. 
 
-function billTotal (total){
-	var tip = .15;
-	var tax = .095; 
-
-	tip = total * tip;
-	tax = total * tax;
-	total = Math.round((tip + tax + total) * 100) / 100;
-	return "Your total comes to " + total;
+//================================================Warm Ups
+function sum(n) {
+  var result = 0;
+  while (n > 0) {
+    result = result + n;
+    n = n - 1;
+  }
+  return result;
 }
 
-function animals (animal, emotion){
-	if (animal ==='cat' && emotion === 'happy'){
-		return 'The cat dances with joy!';
-	} else if (animal ==='cat' && emotion === 'sad'){
-		return 'The cat mopes around';
-	} else if (animal ==='cat' && emotion === 'angry') {
-		return 'The cat shreds your favorite pair of shoes!';
-	}
-
-	if(animal ==='dog' && emotion === 'happy'){
-		return 'The dog licks your face!';
-	} else if (animal ==='dog' && emotion === 'sad'){
-		return 'The dog gives you sad puppy eyes';
-	} else if(animal ==='dog' && emotion === 'angry'){
-		return 'The dog barks really loud!';
-	}
+function power_iter(base, exponent) {
+  var result = 1;
+  var count = 0;
+  while (count < exponent) {
+    result = result * base;
+    count = count + 1;
+  }
+  return result;
 }
 
-function digitalSum(num){
-	if(num === 0){
-		return num;
-	}
-	return (num % 10) + digitalSum(Math.floor(num / 10))
-}
 
 //=================================================Exercises 
 var arr = [1,2,3,4,5];
@@ -73,6 +60,14 @@ function mystery(array) {
     return [];
   }
   return conj(mystery(rest(array)), first(array));
+}
+
+function mysteryAdd(array) {
+	var total = 0;
+  if (array.length === 0) {
+    return 0;
+  }
+  return first(array) + mysteryAdd(rest(array));
 }
 
 function mysterySquared(array) {
