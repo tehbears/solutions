@@ -154,10 +154,8 @@ function countCharacters(str){
 		var key = str[i].toLowerCase();
 		if(!objResult[key] && key !== ' '){
 			objResult[key] = 1;
-		} else {
-			if(key !== ' '){
-				objResult[key] = objResult[key] + 1;
-			}
+		} else if (key !== ' ') {
+			objResult[key] = objResult[key] + 1;
 		}
 	}
 	return objResult;
