@@ -47,13 +47,28 @@ function displayBook(book) {
 	return book.title + ', by ' + book.author + ' -- ' + book.genre; 
 }
 
-
 function displayAllBooks(arrayOfBooks) {
 	var counter = 1;
-	var bookResult = ''
+	var bookResult = ' ';
+
 	for(var i = 0; i < arrayOfBooks.length; i++){
-		bookResult = bookResult + counter + ': ' + arrayOfBooks[i].title + ', by ' + arrayOfBooks[i].author + ' -- ' + arrayOfBooks[i].genre + '.\n'; 
+		bookResult = bookResult + counter + ': ' + arrayOfBooks[i].title + ', by '; 
 		counter++;
+
+	 	if(typeof arrayOfBooks[i].author !== 'string'){
+		 	for(var j = 0; j < arrayOfBooks[i].author.length; j++){
+		 		if(j + 1 === arrayOfBooks[i].author.length){
+					bookResult = bookResult + arrayOfBooks[i].author[j] + ' -- ' + arrayOfBooks[i].genre + '.\n';
+						break;
+		 		} 
+		 		else {
+				 	bookResult = bookResult + arrayOfBooks[i].author[j] + ' and ';
+		 		}
+		 	} 
+		}
+		else{
+		 	bookResult = bookResult + arrayOfBooks[i].author + ' -- ' + arrayOfBooks[i].genre + '.\n';
+		}
 	}
 	return bookResult;
 }
@@ -87,7 +102,7 @@ function movieMaker (title, director, duration, releaseDate, obj){
 	};
 }
 
-var inception = movieMaker('Inception', 'Chistopher Nolan', '2 hours', 'May 2012', [{ name: 'Leonardo DiCaprio', role: 'Main actor', awards: 'AwesomeStuff'}, {name: 'Joseph Gordon-Levitt',role: 'Supporting Actor', award: 'Something Cool'}]);
+var inception = movieMaker('Inception', 'Chistopher Nolan', '2 hours', 'May 2012', [{ name: 'Leonardo DiCaprio', role: 'Main actor', awards: 'AwesomeStuff'}]);
 
 var imitationGame = movieMaker('The Imitation Game', 'Morten Tyldum', '2 hours', 'May 2014', [{name: 'Benedict Cumberbatch', role: 'Main Actor', awards: 'Some really amazing cool stuff'}, {name: 'Keira Knightley', role: 'Main Actress', award: 'Something freaking amazing' }]);
 
