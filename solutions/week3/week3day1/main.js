@@ -49,7 +49,15 @@ function range(start, end) {
 	
 	return	result.push(start), range(start + 1, end);
 }
-
+//same problem but solved using a while loop
+function rangeWhile(start, end) {
+    var arr = [];
+    while (start < end){
+        arr.push(start);
+        start = start + 1;
+    }
+    return arr;
+}
 // range(0, 4); // => [0, 1, 2, 3]
 // range(2, 7); // => [2, 3, 4, 5, 6]
 // range(10, 10); // => []
@@ -65,21 +73,26 @@ var people = [
   {name: {first: "Louis", last: "Reasoner"}, age: 21}
 ];
 
-function fullName(obj){
-	return obj.name.first + ' '+ obj.name.middle + ' ' + obj.name.last;
+function fullname(arr,i) {
+    first = arr[i].name.first;
+    middle = arr[i].name.middle;
+    last = arr[i].name.last;    
+    if (middle === undefined){
+     return first + " " + last;
+    } 
+    return first + " " + middle + " " + last;
 }
 
-function longestName(array) {
-  var currentLongestName = 0;
-  for(var i = 0; i < array.length; i++){
-  	var wholeName = fullName(array[i]);
-  	if(wholeName.length - 2 > currentLongestName){
-  		currentLongestName = array[i];
-  	}
+function longestName(people) {
+  var longest = '';
+  for (var i = 0; i < people.length; i++) {
+    if (fullname(people,i).length > longest.length){
+        longest = fullname(people,i);
+    }
   }
-  return currentLongestName
+  return longest;
 }
-
+console.log('longestName: ', longestName(people));
 // => {name: {first: "Alyssa", middle: "P.", last: "Hacker"}, age: 26}
 
 
@@ -301,17 +314,16 @@ var evenFilter = function(numbers){
 }
 
 //2
-var anotherNumsArray = [1,3,9,12, -1, -3, -5, 27, 81];
+var anotherNumsArray = [1,3,9,12, -1, -3, -5, 27, 81, 126, 8, 314159265];
+///Almost works, does not work with really large numbers such as 314149265
 
 var multiplesOfThree = function(numbers){
   return filter(numbers, function(num){
-    ///I have no idea, obviosuly num / 3 === 0;
-    //Because I need a way to loop through it, until it reaches
-    //0 
+    return num % 3 === 0;
   });
 }
 
-console.log(multiplesOfThree(anotherNumsArray))
+console.log('multiplesOfThree',multiplesOfThree(anotherNumsArray))
 
 //3
 var positives = function(numbers){
