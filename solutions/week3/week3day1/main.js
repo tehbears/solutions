@@ -136,7 +136,7 @@ function sumSquares(numbers) {
   var total = 0;
   each(numbers, function(number){
     total += number * number; 
-  })
+  });
   return total;
 }
 //3
