@@ -66,7 +66,6 @@ function averageAge(peopleArray) {
   	acc += age;
   	count++;
   });
-  console.log(acc)
   acc = acc / count;
   return acc;
 }
@@ -88,14 +87,12 @@ function indexedExponentials(numbersArray) {
 	each(numbersArray, function(number, i){
 		acc.push(Math.pow(number, i));
 	});  
-
 	return acc;
 }
 
 //2
 function evenIndexedOddNumbers(numbersArray){
-		var acc = [];
-
+	var acc = [];
 	each(numbersArray, function(number, i){
 		if(i % 2 === 0 && number % 2 === 0){
 			acc.push(number);
