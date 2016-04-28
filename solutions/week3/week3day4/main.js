@@ -95,8 +95,6 @@ function each(coll, f) {
   }
 }
 
-
-
 function reduce(array, f, start) {
   var acc = start;
   each(array, function(element) {
@@ -170,7 +168,7 @@ function factorial(n) {
 
 console.log(factorial(4));
 
-//======================================================More Practiced
+//======================================================More Practice
 
 // The sumBy function from previous lessons can be implemented using each like this:
 
@@ -212,7 +210,7 @@ function maxReduce(numsArray){
 			if(num > total){
 				return total = num;
 			} else {
-				return total = total;
+				return total;
 			}
 	}, 0);
 }
@@ -352,9 +350,10 @@ console.log('join: ', join(["one", "two", "three"], ":")); // => "one:two:three"
 //2
 // Uses of reduce are not restricted to turning arrays into numbers -- use reduce to rewrite map (instead of using each).
   function mapReduce(array, f){
-    return reduce(array, function(result, element){
+    return reduce(array, function(result, element, key){
       console.log('mapReduce Result: ', result);
-      return result.push(f(element));
+      result[key] = element;
+      return result;
     }, []);
   }
 
@@ -379,5 +378,118 @@ function countWords(s) {
   return acc;
 }
 
+function countWords(s){
+  s = s.split(' ');
+  return reduce(s, function(acc, word){
+    if(acc[word] === undefined) {
+      acc[word] = 1;
+      return acc;
+    } else {
+      acc[word]++;
+      return acc;
+    }
+  }, {})
+}
+
+console.log('count words: ', countWords('one one two two three four four'));
 // Rewrite countWords using reduce.
 // Write the function countChars that works like countWords, but counts characters instead of words (using reduce of course).
+
+function countChars(s){
+  s = s.split('');
+  return reduce(s, function(acc, letter){
+    if(acc[letter] === undefined) {
+      acc[letter] = 1;
+      return acc;
+    } else {
+      acc[letter]++;
+      return acc;
+    }
+  }, {})
+}
+
+console.log('countChars: ',countChars('aaaaabbbcccccddddiiiiiigggg'));
+
+
+//======================================================Improved Reduce
+
+function each(coll, f) {
+  if (Array.isArray(coll)) {
+    for (var i = 0; i < coll.length; i++) {
+      f(coll[i], i);
+    }
+  } else {
+    for (var key in coll) {
+      f(coll[key], key);
+    }
+  }
+}
+
+function reduce(array, f, acc) {
+  if (acc === undefined) {
+    acc = array[0];
+    array = array.slice(1);
+  }
+  each(array, function(element, i) {
+    acc = f(acc, element, i);
+  });
+  return acc;
+}
+
+function range(start, end) {
+  var acc = [];
+  for (var i = start; i <= end; i++) {
+    acc.push(i);
+  }
+  return acc;
+}
+
+function factorial(n){
+  return reduce(range(1, n), function(acc, num){
+    return acc * num;
+  });
+}
+
+console.log('factorial: ', factorial(9));
+
+//2
+function maxReduce(numsArray){
+  return reduce(numsArray, function(acc, num){
+    if(acc < num){
+      return acc = num;
+    } else {
+      return acc;
+    }
+  });
+}
+
+console.log('maxReduce: ', maxReduce([1, 2, 3, 4, 5, 500, 6, 9, 10]))
+
+// The range function that we've explored so far looks like this:
+// Modify range so that the end parameter is optional, and in the event that it is not supplied, range computes a range from 0 to start.
+
+// function range(start, end) {
+//   var acc = [];
+//   for (var i = start; i < end; i++) {
+//     acc.push(i);
+//   }
+//   return acc;
+// }
+
+function rangeWithoutEndProvided(start, end) {
+  var acc = [];
+  if(end === undefined){
+    end = start; 
+    start = 0;
+  }
+  for (var i = start; i < end; i++) {
+    acc.push(i);
+  }
+  return acc;
+}
+
+console.log('rangeWithoutEndProvided: ', rangeWithoutEndProvided(9));
+
+//============================================================Advance 
+
+// There is a way to implement reduce such that it works on both arrays and objects. You'll likely want to make use of Object.keys function.

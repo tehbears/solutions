@@ -61,7 +61,6 @@ function averageAge(peopleArray) {
   var acc = 0;
   var count = 1;
   var ageArray = ages(peopleArray);
-
   each(ageArray, function(age){
   	acc += age;
   	count++;
@@ -222,9 +221,11 @@ function lastNames(peopleArray) {
 
 function fullNames(peopleArray) {
   return map(peopleArray, function(person) {
-    return  person.name.first + ' ' + person.name.last;
+    return firstNames(person) + ' ' + lastNames(person);
   });
 }
+
+console.log('fullNames: ', fullNames(people));
 
 //2
 function abs(x) {
@@ -235,15 +236,35 @@ function abs(x) {
 }
 
 console.log('map abs', map([1, -2, 37, -100, -8, 5], abs));
-
 //3
-function agesMap(peopleArray, age) {
-  return map(peopleArray, function(person) {
-    return person[age];
+// Part One: Let's start by writing a function max that, when given an array of numbers computes the maximum number in that array. You will want to use EACH for this.
+function max(numbers) {
+  // YOUR CODE HERE
+  var acc = 0;
+  each(numbers, function(number){
+    if(number > acc){
+        acc = number;
+    }
   });
+  return acc;
+  // return max[0]
 }
+console.log('Max: ', max([1, 3, 2])); // => 3
+console.log('Max: ', max([4, 23, 100])); // => 100
 
-console.log('agesMap', agesMap(people, 'age'));
+var sampleInput = [ // it's an array
+  [1, 3, 2], // of arrays of numbers
+  [4, 23, 100],
+  [7, 6, 3, -2]
+];
+// maximums(sampleInput); // => [3, 100, 7]
+// Part Two: Now that you have a function that computes the the maximum number in an array of numbers, use map to transform each array in the sampleInput into its maximum by completing the maximums function:
+function maximums(arrayOfNums){
+    return map(arrayOfNums, function(nums){
+        return max(nums);
+    })
+}
+console.log('maximums: ', maximums(sampleInput));
 
 //4
 var stringOfPeople = "Alyssa,P.,Hacker,26\nBen,,Bitdiddle,34\nEva,Lu,Ator,40\nLem,E.,Tweakit,45\nLouis,,Reasoner,21";
@@ -260,6 +281,52 @@ function parseCSV (peopleString){
 
 console.log('parseCSV', parseCSV(stringOfPeople));
 
+//=================================================More Practiced
+
+//1
+function exponentials(numbers) {
+  // YOUR CODE HERE
+  return map(numbers, function(number){
+  	return Math.pow(number,number);
+  })
+}
+console.log('expo: ', exponentials([1, 2, 3, 4])); // => [1, 2*2, 3*3*3, 4*4*4*4] => [1, 4, 27, 256]
+console.log('expo: ', exponentials([3, 2, 5])); // => [27, 4, 3125]
+
+
+//2
+// First, write a function reverse that accepts a string as a parameter and returns a reversed version of that string (you'll want to use a for loop for this). Then, use reverse to write a function called reverseWords that accepts a string as an argument, and returns a string with all of its words reversed. You'll want to use split and join in both of these functions.
+
+function reverse(str){
+		var result = [];
+		str = str.split('');
+		for(var i = str.length - 1; i >= 0; i--){
+			result.push(str[i]);
+	}
+	return result.join('');
+}
+
+function reverseWords(str){
+	str = str.split(' ');
+  var holdResultArray = map(str, function(word){
+    return reverse(word);
+  });
+  return holdResultArray.join(' ');
+}
+
+
+
+console.log('reverseWords: ', reverseWords("hello world")); // => "olleh dlrow"
+// Note that reverseWords should reverse each word individually, not the entire string
+
+//3
+function pluck(peopleArray, age) {
+  return map(peopleArray, function(person) {
+    return person[age];
+  });
+}
+
+console.log('pluck: ', pluck(people, 'age'));
 //=================================================Advanced
 //1
 function map2(array1, array2, func){
@@ -278,19 +345,58 @@ console.log('map2: ', map2([1, 2, 3], [4, 5, 6], function(a, b) {
 // Now, write a function called mapN that accepts an arbitrary number of arrays and a n-ary function as arguments, and constructs a new array by combining the elements of all the arrays, e.g.:
 	// You'll need to read about the arguments keyword and apply to complete this function.
 
-function mapN(){
-	var acc = [];
-	var args = Array.prototype.slice.call(arguments);
-	var func = args.splice(args.length - 1, 1);
-
-	console.log('func[0]: ', func[0]);
-	console.log('args: ', args);
-	
-	for(var i =0; i < args.length; i++){
-		acc.push(func[0].apply(null, args));
-	}
-	return acc;
+function each(coll, f) {
+  if (Array.isArray(coll)) {
+    for (var i = 0; i < coll.length; i++) {
+      f(coll[i], i);
+    }
+  } else {
+    for (var key in coll) {
+      f(coll[key], key);
+    }
+  }
 }
+
+function map(array, f) {
+  var acc = [];
+  each(array, function(element, i) {
+    acc.push(f(element, i));
+  });
+  return acc;
+}
+
+var mapN = function() {
+  //get function
+  var func = arguments[arguments.length - 1];
+  //get passed in arrays
+  var arrays = [].slice.call(arguments, 0, arguments.length-1);
+
+  //if we only have one array, then we do not need to use apply
+  if(arrays.length === 1) {
+    return map(arrays[0], func);
+  }
+
+  //if we have more than one array then we need to use continue
+
+  var results = [];
+  //initialize results array
+  each(arrays, function() {
+    results.push([]);
+  });
+  // Builds a new array that contains all of index 0, a new array that contains all of index 1 and so forth
+  each(arrays, function(arr) {
+    each(arr, function(elem, i) {
+      results[i].push(elem);
+    })
+  });
+
+	//we then pass the array of arrays to map, and each array is passed
+		//to our function through the apply method
+  return map(results, function(arr) {
+    return func.apply(null, arr);
+  });
+}
+
 
 console.log('mapN with many arrays: ', mapN([1, 2, 3], [4, 5, 6], [2, 2, 2], function(a, b, c) {
   return (a * b) + c;
