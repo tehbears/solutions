@@ -1,8 +1,9 @@
 //====================================================Warm Ups
 
 // What does map do? Discuss with your partner until you are confident that you understand the purpose of the map abstraction. Try to describe what map does, not how it does what it does.
-
+  //Map transforms an array, without modifying the original array, and hands back a new array
 // Read and experiment with the code below to figure out what it does and how it works.
+
 function each(coll, f){
   if(Array.isArray(coll)){
     for(var i = 0; i < coll.length; i++){
@@ -58,6 +59,7 @@ console.log('Map Coordinates: ', coordinatesToObjectsMap(coordinates));
 
 // This is the factorial function from the first week, that computes the factorial of its parameter n:
 // Using map and the factorial function, write a function factorials that accepts an array of numbers as a parameter and outputs an array of the factorial of each of those numbers.
+
 var numArrays = [1,2,3,4,5,6,7,8,9];
 
 function factorial(n) {
@@ -145,11 +147,13 @@ console.log('map upperCaseValues: ', upperCaseValues(testObj));
 
 function countNestedKeys(object) {
   return map(object, function(value){
+    console.log('value: ', value);
+    console.log('Object.keys: ', Object.keys(value))
     return Object.keys(value).length;
   });
 
 }
-console.log(countNestedKeys({a: {b: 1, c: 7}, f: {h: 22, g: 12, i: 24}}));
+console.log('countNestedKeys: ', countNestedKeys({a: {b: 1, c: 7}, f: {h: 22, g: 12, i: 24}}));
 // => {a: 2, b: 3}
 
 //====================================================Basic Requirements Filter
@@ -290,6 +294,24 @@ console.log('evenIndexedEvenLengths: ', evenIndexedEvenLengths(["red", "green", 
 
 // Write a version of filter that works on arrays and objects; then, use your updated version of filter to filter an object with values of mixed types to an object with only numeric values. You should be able to use your modified version of filter as follows:
 
+var filter = function(coll, predicate) {
+  var acc = [];
+  if(!Array.isArray(coll)){
+    acc = {};
+    each(coll, function(element, key) {
+      if (predicate(element, key)) {
+        acc[key] = (element);
+      }
+    });
+  } else {
+    each(coll, function(element, i) {
+      if (predicate(element, i)) {
+        acc.push(element);
+      }
+    });
+  }
+return acc;
+}
 console.log('filter objects: ', filter({a: 1, b: "dog", c: true}, function(value) {
   return typeof value === "number";
 }));
