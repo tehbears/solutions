@@ -1,4 +1,65 @@
-//==============================================warm ups
+//Reduce exercises start on line 86
+// warm ups using reduce
+
+// Discuss the purpose of reduce with your partner until both of you are confident that you could explain its purpose to the class. Try to describe what reduce does, not how it does it.
+
+// Rewrite the sumCubes function below using reduce instead of each:
+function each(coll, func){
+  if(Array.isArray(coll)){
+    for(var i = 0; i < coll.length; i++){
+      func(coll[i], i);
+    }
+  } else {
+    for(var key in coll){
+      func(coll[key], key);
+    }
+  }
+}
+
+function reduce(coll, f, start){
+  var acc = start;
+  each(coll, function(element, i){
+    acc = f(acc, element, i);
+  });
+  return start;
+}
+var numsArray = [1,2,3,4];
+
+function sumCubes(numbers) {
+  var total = 0;
+  each(numbers, function(number) {
+    total = total + Math.pow(number, 3);
+  });
+  return total;
+}
+
+function sumCubesReduce(array){
+  return reduce(array, function(start, element){
+    return start + Math.pow(element, 3);
+  }, 0);
+}
+
+console.log('sumCubes: ', sumCubes(numsArray));
+console.log('sumCubesReduce: ', sumCubesReduce(numsArray));
+
+// Write a function called smallestWords that accepts two parameters, string and threshold (number), and returns an array containing all the words smaller than threshold. You should use reduce to complete this function.
+console.log('hello!');
+function smallestWordsReduce(string, threshold) {
+  console.log('string', string);
+  string = string.split(' ');
+  return reduce(string, function(start, word, i){
+    if(word.length < threshold){
+      start.push(word);
+    }
+    return start;
+  },[])
+}
+
+console.log('smallestWords: ', smallestWordsReduce("the quick brown fox", 4)); // => ["the", "fox"]
+
+
+
+//==============================================warm ups using filter
 
 function each(coll, f) {
   if (Array.isArray(coll)) {
@@ -81,7 +142,7 @@ function smallestWords(string, threshold) {
 
 smallestWords("the quick brown fox", 4); // => ["the", "fox"]
 
-//=========================================================Exercises
+//=========================================================Exercises Reduce
 
 function each(coll, f) {
   if (Array.isArray(coll)) {

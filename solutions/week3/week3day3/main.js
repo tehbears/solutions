@@ -1,4 +1,7 @@
-//====================================================Warm Ups
+//Filter Challenges start on line 162 Week 3 Day 3
+//Improved Mapping starts on line 76
+
+//====================================================Warm Ups using map
 
 // What does map do? Discuss with your partner until you are confident that you understand the purpose of the map abstraction. Try to describe what map does, not how it does what it does.
   //Map transforms an array, without modifying the original array, and hands back a new array
@@ -70,7 +73,7 @@ function factorial(n) {
 }
 
 console.log('map using Factorial: ', map(numArrays, factorial));
-//======================================================Basic Requirements
+//======================================================Basic Requirements Improved Mapping
 
 function each(coll, f) {
   if (Array.isArray(coll)) {
