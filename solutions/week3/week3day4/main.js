@@ -4,6 +4,7 @@
 // Discuss the purpose of reduce with your partner until both of you are confident that you could explain its purpose to the class. Try to describe what reduce does, not how it does it.
 
 // Rewrite the sumCubes function below using reduce instead of each:
+
 function each(coll, func){
   if(Array.isArray(coll)){
     for(var i = 0; i < coll.length; i++){
@@ -43,9 +44,8 @@ console.log('sumCubes: ', sumCubes(numsArray));
 console.log('sumCubesReduce: ', sumCubesReduce(numsArray));
 
 // Write a function called smallestWords that accepts two parameters, string and threshold (number), and returns an array containing all the words smaller than threshold. You should use reduce to complete this function.
-console.log('hello!');
+
 function smallestWordsReduce(string, threshold) {
-  console.log('string', string);
   string = string.split(' ');
   return reduce(string, function(start, word, i){
     if(word.length < threshold){
@@ -116,11 +116,11 @@ console.log('olderThan30: ', olderThan30(people));
 
 function findNameByLetter(peopleArray, letter){
 	return filter(peopleArray, function(person){
-		return person.name.first[0].toLowerCase() === letter;
+		return person.name.first[0].toLowerCase() === letter.toLowerCase();
 	});
 }
 
-console.log('findNameByLetter: ', findNameByLetter(people, 'l'));
+console.log('findNameByLetter: ', findNameByLetter(people, 'L'));
 
 //4
 // Rewrite the sumCubes function below using reduce instead of each:
