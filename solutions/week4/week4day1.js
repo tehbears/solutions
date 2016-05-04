@@ -401,7 +401,7 @@ function makeAccount1(initial) {
       return 'Your balance is: $' + balance;
     },
     transactionHistory: function(n){
-      return transaction[n];
+      return transaction.slice(0, n);
     },
     aveargeDepositWithdrawal: function(){
       var depositAverage = 0;
@@ -428,7 +428,7 @@ console.log('checkBalance: ', account.checkBalance()); // => "Your balance is: $
 console.log('deposit: ', account.deposit(50));
 console.log('checkBalance: ', account.checkBalance()); // => "Your balance is: $150"
 console.log('withdrawal: ' , account.withdraw(30));
-console.log('transAction: ', account.transactionHistory(1)); // => [{...}, {...}]
+console.log('transaction history : ', account.transactionHistory(2)); // => [{...}, {...}]
 
 console.log('aveargeDepositWithdrawal ', account.aveargeDepositWithdrawal());
 // Other ideas to try include:
