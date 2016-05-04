@@ -198,15 +198,13 @@ var people = [
 function averageAge(people) {
   // First you'll need to compute the sum of all the ages
   // Second, divide the sum by the number of people (people.length)
-  var counter = 0;
   var sumOfAge = reduce(people, function(total, person){
-  	counter++;
   	return total + person.age;
   }, 0);
 
-  return sumOfAge / counter;
+  return sumOfAge / people.length;
 } 
-console.log(averageAge(people));
+console.log('averageAge: ', averageAge(people));
 
 // The range function from yesterday looks like this:
 
