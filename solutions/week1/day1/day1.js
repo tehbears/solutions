@@ -134,4 +134,4 @@ function average(num_1, num_2){
 function sqrt(number){
 	return average(number/average(number/average((number/10),10),average((number/10),10)),average(number/average((number/10),10),average((number/10),10)));
 }
-console.log(sqrt(250));
+console.log(sqrt(16));
