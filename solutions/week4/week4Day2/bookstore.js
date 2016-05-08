@@ -46,9 +46,16 @@ function makeStore(){
       return displayBooks(newBookArray);
     },
     search: function(query){
-      return filter(arrayOfBooks, function(book, i){
-        return isMatch(book, query);
+      var resultArray = filter(arrayBooks, function(book){
+       return isMatch(book, query) ;
       });
+
+      var bookList = '';
+      
+      each(resultArray, function(book){
+        bookList += displayBook(book);
+      });
+      return bookList;
     },
     getBook: function(id){
       return filter(arrayOfBooks, function(book, i){

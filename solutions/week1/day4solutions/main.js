@@ -66,18 +66,6 @@ function repeatString(str){
 	return innerRepeatString('', 3);
 }
 
-function fib(n){
- 	if(n < 2){
- 		return 1;
- 	}
- 	// console.log ((n - 1) + (n - 2));
-	return fib(n - 1) + fib(n -2);
-}
-
-// 1 1 2 3 5 8 13 21 34
-// | | | | | | |  |  |
-// 0 1 2 3 4 5 6  7  8
-
 function sumStartEnd(start, end){
 	function innerSumStartEnd(total, start){
 		if(start > end){
@@ -119,12 +107,26 @@ function addWithHelpers(x, y){
 }
 
 //=========================================================isEven
-//====Bitwise magic :D
-function isEven (n) {
-	if((n&1) === 0){
-		return true;
+function myOwnModulo(x, y){
+
+	function findRemainder (currentRemainder, count){
+		if( (x - (y * count) ) < 0){
+			return currentRemainder;
+		} else if( (x - (y * count) ) === 0){
+			currentRemainder = 0;
+			return currentRemainder;
+		}
+		currentRemainder = x - (y * count);
+		return findRemainder(count + 1);
 	}
-	return false;
+	return findRemainder(1, 1);
+}
+
+function isEven (n) {
+    if(myOwnModulo(n, 2) === 0){
+        return true;
+    }
+    return false;
 }
 
 //================================================repeated addition for multiplication
@@ -141,15 +143,13 @@ function repeatedAddition(x, y){
 
 //==========================================================use .slice to get the length of a string
 
-function stringLength (str, count){
-	function innerStringLength(count){
-		var newStr = str.slice(0, count);
-		if(str === newStr){
-			return count;
-		}
-		return innerStringLength(count + 1);
-	}
-	return innerStringLength(1)
+function stringLength(n){
+  function innerStringLength(n, count){
+    if(n.slice(1) === ""){
+        return count;
+    } return innerStringLength(n.slice(1), count + 1);
+  }
+  return innerStringLength(n, 1)
 }
 
 //=============================================================create your own modulo

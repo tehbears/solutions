@@ -59,11 +59,16 @@ function fib(n){
 	return fib(n - 1) + fib(n -2);
 }
 
+//================================More Pratice
+
 function sumStartEnd(start, end){
 	if(start > end){
-		return 0;
+		return (end, start);
 	}
-	return start + sumStartEnd(start + 1, end);
+	if(end === start){
+		return end;
+	}
+	return end + sumStartEnd(start, end - 1);
 }
 
 function factorialStartEnd (start, end){
