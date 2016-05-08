@@ -23,15 +23,19 @@ function lhs (a, b){
 	return (a + b) * (a + b);
 }
 
+console.log('lhs: ', lhs(6,6));
 //===========rhs solution
 
 function rhs (a,b){
 	return (a * a) + ( 2  * ( a  * b ) ) + (b * b);
 }
 
+console.log('rhs: ', rhs(6,6));
+
+//lhs and rhs both return 144, so yes they produce the same result.
 
 //===========================================================Old enough to drink
-
+//4
 function oldEnough (age){
 	if(age >= 21){
 		return true;
@@ -39,7 +43,7 @@ function oldEnough (age){
 	return false;
 }
 
-
+//5
 //==========================================================String same length?
 
 function sameLength(string1, string2){
@@ -49,6 +53,7 @@ function sameLength(string1, string2){
 	return false
 }
 
+//6
 //===========================================================Password long enough
 
 function passwordLongEnough (password){
@@ -58,14 +63,64 @@ function passwordLongEnough (password){
 	else return false;
 }
 
+//Conditionals If:
+// Write a function bouncer that accepts a person's name and age as arguments, and returns either "Go home, .", or "Welcome, !" depending on whether or not the person is old enough to drink.
 
-//=============================================================random int
+// Write a function max that takes two numbers as arguments, and returns the larger one.
 
+// Write a function min that takes two numbers as arguments, and returns the smaller one.
+
+// Write functions larger and smaller that each accept two strings as arguments, and return the larger and smaller strings, respectively.
+//1
+function bouncer(name, age){
+	if(age > 21){
+		return 'Welcome, ' + name + '!';
+	} else {
+		'Go home, ' + name + '.';
+	}
+}
+
+//2
+function max(num1, num2){
+	if(num1 > num2){
+		return num1;
+	} else {
+		return num2;
+	}
+}
+
+//3
+function min(num1, num2){
+	if(num1 < num2){
+		return num1;
+	} else {
+		return num2;
+	}
+}
+
+//4
+function larger(str1, str2){
+	if(str1 > str2){
+		return str1;
+	} else {
+		return str2;
+	}
+}
+
+function smaller(str1, str2){
+	if(str1 < str2){
+		return str1;
+	} else {
+		return str2;
+	}
+}
+//==========================More Pratice
+
+//3
+//this also incoporates the advance instructions from the second set of exercises on day 2
 function randInt (n){
 	return Math.random() * (n - 1);
 }
-
-//================================================================Guess my number
 
 function guessMyNumber (num){
 	var randomNum = Math.floor(Math.random() * 5)
@@ -86,18 +141,24 @@ function guessMyNumber (num){
 	//A unary operator has only one
 	// !false unary example
 
-//==========================================================================whatToDoOutside
-	function whatToDoOutside (temp, condition){
-		if(temp === 'Sunny' && condition === 'Warm'){
-			return 'Go Surfing!';
-		} else if(temp === 'Snowy' && condition === 'Cold'){
-			return 'Go skiing!';
-		} else if (temp === 'Rainy' && condition === 'Warm'){
-			return 'Dance in the rain!';
-		}
-	}
+//4
+// Translate each sentence into code:
+
+// "Either it is warm today, or it is cold today."
+	//"Either it is warm today" || "it is cold today."
+// "That dog is either a french bulldog or a boston terrier."
+	//"That dog is either a french bulldog" || "a boston terrier."
+
+//6
+// Translate each sentence into code:
+
+// "It is cold and raining outside."
+	//"it is cold" && "raining outside."
+// "That cat is hissing and growling."
+	//"That cat is hissing" && "growling."
 
 	//=================================================================================bar bouncer function
+	//this incorporates rules from the advance section
 
 	function bouncer (age, name, day){
 		if(age >= 21 && name !== 'Joe' && 'Friday' === day || day === 'Saturday'){
@@ -112,6 +173,7 @@ function guessMyNumber (num){
 	}
 
 //=====================================================================================scoreToGrade
+//this is the completed functions following the instruction from the advance section
 function letterGrade (letter, score) {
 	if(score === 100){
 		return letter + '+';
@@ -141,6 +203,24 @@ function letterGrade (letter, score) {
 		return letterGrade('F', score);
 	}
 }
+
+//===============More Pratice
+
+//==========================================================================whatToDoOutside
+	function whatToDoOutside (temp, condition){
+		if(temp === 'Sunny' && condition === 'Warm'){
+			return 'Go Surfing!';
+		} else if(temp === 'Snowy' && condition === 'Cold'){
+			return 'Go skiing!';
+		} else if (temp === 'Rainy' && condition === 'Warm'){
+			return 'Dance in the rain!';
+		}
+	}
+
+//==============================Advance
+//Refer above for advance bouncer
+
+//Refer above for advance score to grade and letter grade
 
 // Write a function or that works like ||, but only uses ! and &&.
 // Write a function and that works like &&, but only uses ! and ||.
