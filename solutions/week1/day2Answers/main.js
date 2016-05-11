@@ -146,6 +146,7 @@ function guessMyNumber (num){
 
 // "Either it is warm today, or it is cold today."
 	//"Either it is warm today" || "it is cold today."
+
 // "That dog is either a french bulldog or a boston terrier."
 	//"That dog is either a french bulldog" || "a boston terrier."
 
@@ -154,6 +155,7 @@ function guessMyNumber (num){
 
 // "It is cold and raining outside."
 	//"it is cold" && "raining outside."
+	
 // "That cat is hissing and growling."
 	//"That cat is hissing" && "growling."
 

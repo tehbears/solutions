@@ -129,66 +129,47 @@ function stringLength(n){
 
 //=============================================================create your own modulo
 
-function myOwnModulo(x, y){
-	var currentRemainder;
-
-	function findRemainder (count){
-		if( (x - (y * count) ) < 0){
-			return currentRemainder;
-		} else if( (x - (y * count) ) === 0){
-			currentRemainder = 0;
-			return currentRemainder;
-		}
-		currentRemainder = x - (y * count);
-		return findRemainder(count + 1);
+function myOwnModulo (x, y, count, currentRemainder){
+	if( (x - (y * count) ) < 0){
+		return currentRemainder;
+	} else if( (x - (y * count) ) === 0){
+		currentRemainder = 0;
+		return currentRemainder;
 	}
-	
-	return findRemainder(0);
+	currentRemainder = x - (y * count);
+	return myOwnModulo(x, y, count + 1, currentRemainder);
 }
-console.log('myOwnModulo: ',  myOwnModulo(82, 9));
+	
+console.log('myOwnModulo: ',  myOwnModulo(47, 6, 0));
 //============================================================find characters
 
-function findCharacterCount (str, character){
-	var totalCount;
-
-	function countCharacter (characterCount, sliceCount1, sliceCount2 ){	
-		var currentCharacter = str.slice(sliceCount1, sliceCount2);
-		
-		if(currentCharacter === character){
-			characterCount++;
-		}
-
-		if(currentCharacter === ''){
-			totalCount = characterCount;
-			return;
-		}
-
-		return countCharacter(characterCount, sliceCount1 + 1, sliceCount2 + 1);
+function countChars (str, character, characterCount, sliceCount1, sliceCount2){	
+	if(str.slice(sliceCount1, sliceCount2) === character){
+		characterCount++;
 	}
-	countCharacter(0, 0, 1);
-	return totalCount;
+
+	if(str.slice(sliceCount1, sliceCount2) === ''){
+		return characterCount;
+	}
+
+	return countChars(str, character, characterCount, sliceCount1 + 1, sliceCount2 + 1);
 }
 
+console.log('countChars: ', countChars('brandon', 'n', 0, 0, 1));
 //=================================================================create indexOf
 
-function indexOf(str, character){
-	var foundIndex;
-
-	function findIndex(sliceCount1, sliceCount2, currentIndex){
-		if(str.slice(sliceCount1, sliceCount2) === character){
-			foundIndex = currentIndex;
-			return foundIndex;
-		}
-
-		if(str.slice(sliceCount1, sliceCount2) === ''){
-			return 'Error, not found!';	
-		}
-		findIndex(sliceCount1 + 1, sliceCount2 + 1, currentIndex + 1);
+function indexOf(str, character,sliceCount1, sliceCount2, currentIndex){
+	if(str.slice(sliceCount1, sliceCount2) === character){
+		return currentIndex - 1;
 	}
-	findIndex(0,1,0);
-	return foundIndex;
+
+	if(str.slice(sliceCount1, sliceCount2) === ''){
+		return 'Error, not found!';	
+	}
+	return indexOf(str, character, sliceCount1 + 1, sliceCount2 + 1, currentIndex + 1);
 }
 
+console.log('indexOf: ', indexOf('brandon', 'n', 0,1,0));
 //=======================================================improved power function
 
 function powerSquaring (x, n){
